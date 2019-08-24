@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Restaurante.APP.View.Usuario;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Restaurante.APP
 {
@@ -10,7 +9,7 @@ namespace Restaurante.APP
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new LoginView();
         }
 
         protected override void OnStart()

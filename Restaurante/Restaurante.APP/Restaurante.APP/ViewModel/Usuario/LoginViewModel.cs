@@ -1,8 +1,6 @@
-﻿using Restaurante.APP.ViewModel.Utilidades;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Restaurante.APP.View.Home;
+using Restaurante.APP.ViewModel.Utilidades;
+using Restaurante.APP.ViewModel.Utilidades.UtilidadesUI;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -49,7 +47,8 @@ namespace Restaurante.APP.ViewModel.Usuario
         #region [Metodos]
         public async void IniciarSesion()
         {
-
+            UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
+            utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
         }
         #endregion
 

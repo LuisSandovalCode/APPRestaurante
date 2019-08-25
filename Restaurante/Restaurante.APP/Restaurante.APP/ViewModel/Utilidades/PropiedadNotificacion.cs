@@ -8,7 +8,7 @@ namespace Restaurante.APP.ViewModel.Utilidades
 
         protected void OnPropertyChanged(string PorperityName)
         {
-            if (PropertyChanged is null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(PorperityName));
             }

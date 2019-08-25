@@ -1,8 +1,11 @@
-﻿using Restaurante.APP.Model.Usuario;
+﻿using Newtonsoft.Json;
+using Restaurante.APP.ExternalServices;
+using Restaurante.APP.Model.Usuario;
 using Restaurante.APP.View.Home;
 using Restaurante.APP.View.Usuario;
 using Restaurante.APP.ViewModel.Utilidades;
 using Restaurante.APP.ViewModel.Utilidades.UtilidadesUI;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -11,6 +14,8 @@ namespace Restaurante.APP.ViewModel.Usuario
     public class LoginViewModel : PropiedadNotificacion
     {
         #region [Propiedades]
+
+        private static SVUsuario ServicioUsuario;
 
         public LoginModel _UsuarioLogin { get; set; }
 
@@ -70,9 +75,19 @@ namespace Restaurante.APP.ViewModel.Usuario
         {
             if (EsContrasenaValida && EsCorreoValido)
             {
-                await App.Current.MainPage.DisplayAlert("Restaurante", "Datos Correctos", "Ok");
-                //UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
-                //utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView()); 
+                string JsonLogin = JsonConvert.SerializeObject(UsuarioLogin);
+                string JsonRespuesta = await ServicioUsuario.IniciarSesion(JsonLogin);
+                if (!string.IsNullOrEmpty(JsonRespuesta))
+                {
+                    await App.Current.MainPage.DisplayAlert("Restaurante", "Bienvenido", "Ok");
+                    UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
+                    utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Restaurante", "Error en las credenciales", "Ok");
+                }
+
             }
             else
             {
@@ -84,11 +99,15 @@ namespace Restaurante.APP.ViewModel.Usuario
         {
             UtilidadNavegacionUI.IrAView(new NuevoUsuarioView());
         }
+
         #endregion
 
         #region [Constructor]
         public LoginViewModel()
         {
+            if (ServicioUsuario == null)
+                ServicioUsuario = new SVUsuario();
+            UsuarioLogin = new LoginModel();
             IniciarSesionCommand = new Command(IniciarSesion);
             EnterRegistrarUsuarioCommand = new Command(EnterRegistrarUsuario);
         } 

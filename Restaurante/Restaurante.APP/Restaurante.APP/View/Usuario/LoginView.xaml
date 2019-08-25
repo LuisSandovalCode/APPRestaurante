@@ -16,7 +16,7 @@
             <StackLayout Orientation="Vertical"
                          VerticalOptions="CenterAndExpand">
                 <Entry Placeholder="Correo Usuario"
-                       Text="{Binding Path=UsuarioLogin.Correo,Mode=TwoWay}">
+                       Text="{Binding LoginViewModel.UsuarioLogin.Correo}">
                     <Entry.Behaviors>
                         <Validacion:BehaviorValidacionCorreo
                             EsCorreoValido ="{Binding Source={x:Reference LoginUsuario}, 
@@ -30,7 +30,7 @@
                          VerticalOptions="CenterAndExpand">
                 <Entry Placeholder="Contraseña"
                        IsPassword="True"
-                       Text="{Binding Path=UsuarioLogin.Contrasena,Mode=TwoWay}">
+                       Text="{Binding LoginViewModel.UsuarioLogin.Contrasena}">
                     <Entry.Behaviors>
                         <Validacion:BehaviorContrasenaValidacion
                             EsContrasenaValido="{Binding Source={x:Reference LoginUsuario}, 

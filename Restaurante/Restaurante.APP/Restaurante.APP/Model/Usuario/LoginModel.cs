@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Restaurante.APP.Model.Usuario
 {
-    class LoginModel
+    public class LoginModel
     {
         public string Correo { get; set; }
 

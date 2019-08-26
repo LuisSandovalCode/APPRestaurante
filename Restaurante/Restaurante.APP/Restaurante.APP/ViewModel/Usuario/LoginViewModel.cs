@@ -20,6 +20,7 @@ namespace Restaurante.APP.ViewModel.Usuario
 
         private static SVUsuario ServicioUsuario;
 
+        private bool _IsLoading { get; set; }
         public LoginModel _UsuarioLogin { get; set; }
 
         public bool _EsCorreoValido { get; set; }
@@ -68,6 +69,19 @@ namespace Restaurante.APP.ViewModel.Usuario
             }
         }
 
+        public bool IsLoading
+        {
+            set
+            {
+                _IsLoading = value;
+                OnPropertyChanged("IsLoading");
+            }
+
+            get
+            {
+                return _IsLoading;
+            }
+        }
         public ICommand IniciarSesionCommand { get; set; }
 
         public ICommand EnterRegistrarUsuarioCommand { get; set; }
@@ -78,12 +92,20 @@ namespace Restaurante.APP.ViewModel.Usuario
         {
             if (EsContrasenaValida && EsCorreoValido)
             {
+                IsLoading = true;
                 string JsonLogin = JsonConvert.SerializeObject(UsuarioLogin);
                 string JsonRespuesta = await ServicioUsuario.IniciarSesion(JsonLogin);
                 if (!string.IsNullOrEmpty(JsonRespuesta))
                 {
+                    IsLoading = false;
                     await App.Current.MainPage.DisplayAlert("Restaurante", "Bienvenido", "Ok");
-                    await RegistrarCredenciales();
+                    bool ExistenCredenciales = ServicioReal.ValidarCredenciales(UsuarioLogin);
+                    if (!ExistenCredenciales)
+                    {
+                        IsLoading = true;
+                        await RegistrarCredenciales();
+                        IsLoading = false;
+                    }
                     UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
                     utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
                 }
@@ -126,7 +148,7 @@ namespace Restaurante.APP.ViewModel.Usuario
                 ServicioUsuario = new SVUsuario();
             if (ServicioReal == null)
                 ServicioReal = new RealmService();
-            UsuarioLogin = ServicioReal.RecordarCredenciales();
+            _UsuarioLogin = ServicioReal.RecordarCredenciales();
             IniciarSesionCommand = new Command(IniciarSesion);
             EnterRegistrarUsuarioCommand = new Command(EnterRegistrarUsuario);
         } 

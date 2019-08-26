@@ -19,6 +19,26 @@ namespace Restaurante.APP.BaseDatosLocal
         }
 
 
+        public bool ValidarCredenciales(LoginModel usuario)
+        {
+            try
+            {
+                bool ExistenCredenciales = false;
+
+                var Credenciales = _Realm.All<Login>().ToList();
+
+                ExistenCredenciales = Credenciales
+                                                .FirstOrDefault(x=>x.Contrasena.Equals(usuario.Contrasena) &&
+                                                x.Correo.Equals(usuario.Correo))!=null;
+
+                return ExistenCredenciales;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #region [Recordar Credenciales]
         /// <summary>
         /// Método que permite recordar las credenciales desde Realm

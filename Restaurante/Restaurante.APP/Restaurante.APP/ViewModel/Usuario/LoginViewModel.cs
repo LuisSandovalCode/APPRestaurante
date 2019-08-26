@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Restaurante.APP.BaseDatosLocal;
 using Restaurante.APP.ExternalServices;
 using Restaurante.APP.Model.Usuario;
 using Restaurante.APP.View.Home;
@@ -14,6 +15,8 @@ namespace Restaurante.APP.ViewModel.Usuario
     public class LoginViewModel : PropiedadNotificacion
     {
         #region [Propiedades]
+
+        private static RealmService ServicioReal;
 
         private static SVUsuario ServicioUsuario;
 
@@ -80,6 +83,7 @@ namespace Restaurante.APP.ViewModel.Usuario
                 if (!string.IsNullOrEmpty(JsonRespuesta))
                 {
                     await App.Current.MainPage.DisplayAlert("Restaurante", "Bienvenido", "Ok");
+                    await RegistrarCredenciales();
                     UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
                     utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
                 }
@@ -100,6 +104,19 @@ namespace Restaurante.APP.ViewModel.Usuario
             UtilidadNavegacionUI.IrAView(new NuevoUsuarioView());
         }
 
+        public async Task RegistrarCredenciales()
+        {
+            var Confirmacion = await App.Current.MainPage.DisplayAlert("Restaurante", "¿Desea registrar sus credenciales la próxima vez?", "Sí", "No");
+
+            if(Confirmacion)
+            {
+                 bool RegistroCrendenciales = ServicioReal.GuardarCredenciales(UsuarioLogin);
+
+                if (!RegistroCrendenciales)
+                    await App.Current.MainPage.DisplayAlert("Restaurante", "Error al registrar credenciales", "Ok");
+            }
+        }
+
         #endregion
 
         #region [Constructor]
@@ -107,7 +124,9 @@ namespace Restaurante.APP.ViewModel.Usuario
         {
             if (ServicioUsuario == null)
                 ServicioUsuario = new SVUsuario();
-            UsuarioLogin = new LoginModel();
+            if (ServicioReal == null)
+                ServicioReal = new RealmService();
+            UsuarioLogin = ServicioReal.RecordarCredenciales();
             IniciarSesionCommand = new Command(IniciarSesion);
             EnterRegistrarUsuarioCommand = new Command(EnterRegistrarUsuario);
         } 

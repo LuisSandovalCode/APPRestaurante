@@ -1,13 +1,21 @@
-﻿using System;
+﻿using Restaurante.APP.ViewModel.Utilidades;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Restaurante.APP.Model.Usuario
 {
-    class LoginModel
+    public class LoginModel
     {
-        public string Correo { get; set; }
+        public string Correo {
+            get;
 
-        public string Contrasena { get; set; }
+            set;
+        }
+        public string Contrasena {
+            get;
+
+            set;
+        }
     }
 }

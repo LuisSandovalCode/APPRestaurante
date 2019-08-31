@@ -44,9 +44,18 @@
 
             <StackLayout HorizontalOptions="CenterAndExpand"
                          VerticalOptions="CenterAndExpand">
-                <Button Text="Iniciar Sesion"
-                        Command="{Binding IniciarSesionCommand}"
-                        />
+                <StackLayout Orientation="Vertical"
+                             VerticalOptions="Start">
+                    <Button Text="Iniciar Sesion"
+                        Command="{Binding IniciarSesionCommand}"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"
+                             VerticalOptions="Fill">
+                    <Button Text="Nuevo Usuario"
+                            Command="{Binding EnterRegistrarUsuarioCommand}"
+                            BackgroundColor="SkyBlue"
+                            TextColor="White"/>
+                </StackLayout>
             </StackLayout>
 
             <ActivityIndicator

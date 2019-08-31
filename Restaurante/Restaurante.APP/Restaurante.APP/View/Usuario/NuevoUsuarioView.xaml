@@ -3,13 +3,106 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Validacion="clr-namespace:Restaurante.APP.View.Behavior"
              mc:Ignorable="d"
-             x:Class="Restaurante.APP.View.Usuario.NuevoUsuarioView">
+             x:Class="Restaurante.APP.View.Usuario.NuevoUsuarioView"
+             BackgroundColor="SkyBlue"
+             x:Name="RegistrarUsuario">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical"
+                     VerticalOptions="CenterAndExpand">
+            
+            <StackLayout Orientation="Vertical">
+                <Entry Text="{Binding Usuario.Cedula}"
+                       Placeholder="Número de Cédula"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Entry Text="{Binding Usuario.Nombre}"
+                       Placeholder="Nombre de Usuario"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Entry Text="{Binding Usuario.Apellido}"
+                       Placeholder="Primer Apellido"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Entry Text="{Binding Usuario.Apellido2}"
+                       Placeholder="Segundo Apellido"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Entry Text="{Binding Usuario.Correo}"
+                       Placeholder="Correo Electrónico">
+                    <Entry.Behaviors>
+                        <Validacion:BehaviorValidacionCorreo
+                            EsCorreoValido="{Binding EsCorreoValido}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Entry Text="{Binding Usuario.Telefono}"
+                       Placeholder="Número de Teléfono"
+                       Keyboard="Numeric">
+                    <Entry.Behaviors>
+                        <Validacion:BehaviorTelefonoValidacion
+                            EsTelefonoValido="{Binding Source={x:Reference RegistrarUsuario}, 
+                                                Path=BindingContext.EsTelefonoValido, Mode=OneWayToSource}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                  <Label Text="Fecha de Nacimiento" TextColor="White"/>
+                <DatePicker Date="{Binding Usuario.FechaNacimiento}"
+                               MaximumDate="{Binding FechaMaxima}"
+                               MinimumDate="{Binding FechaMinima}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Entry x:Name="txtContrasena"
+                       Text="{Binding Usuario.Contrasena}"
+                       Placeholder="Contraseña">
+                    <Entry.Behaviors>
+                        <Validacion:BehaviorContrasenaValidacion/>
+                        <Validacion:BehaviorCompacionTexto 
+                            EsContrasenaIgual="{Binding Source={x:Reference RegistrarUsuario}, 
+                                                Path=BindingContext.EsContrasenaIgual, Mode=OneWayToSource}"
+                            BindingContext="{x:Reference txtRepetirContrasena}"
+                            Text="{Binding Text}"
+                            Ent="{x:Reference txtRepetirContrasena}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Entry
+                    x:Name="txtRepetirContrasena"
+                    Text=""
+                    Placeholder="Repetir Contraseña">
+                    <Entry.Behaviors>
+                        <Validacion:BehaviorContrasenaValidacion/>
+                        <Validacion:BehaviorCompacionTexto
+                            EsContrasenaIgual="{Binding Source={x:Reference RegistrarUsuario}, 
+                                                Path=BindingContext.EsContrasenaIgual, Mode=OneWayToSource}"
+                            BindingContext="{x:Reference txtContrasena}"
+                            Text="{Binding Text}"
+                            Ent="{x:Reference txtContrasena}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="FillAndExpand">
+                <Button Text="Regisitrar Usuario"
+                        Command="{Binding RegistrarUsuarioCommand}"/>
+            </StackLayout>
+
+            <ActivityIndicator 
+                IsRunning="{Binding isLoading}"
+                IsVisible="{Binding isLoading}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

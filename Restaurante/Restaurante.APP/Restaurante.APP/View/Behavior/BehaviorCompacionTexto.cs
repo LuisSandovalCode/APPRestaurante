@@ -37,7 +37,7 @@ namespace Restaurante.APP.View.Behavior
             if (e.NewTextValue != null)
             {
                 EsContrasenaIgual = (e.NewTextValue.Equals(Text));
-                (sender as Entry).TextColor = (!EsContrasenaIgual) ? Color.Default : Color.Red;
+                ((Ent == null) ? (Entry)sender : Ent).TextColor = EsContrasenaIgual ? Color.Default : Color.Red;
             }
         }
 

@@ -76,6 +76,9 @@ namespace Restaurante.APP.ExternalServices
                         string JsonRespuesta = await vloRespuesta.Content.ReadAsStringAsync();
                         UsuarioRegistrado = Convert.ToBoolean(JsonRespuesta);
                     }
+
+                    if (vloRespuesta.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                        throw new Exception("Servicio no disponible, intentelo más tarde");
                 }
 
                 return UsuarioRegistrado;
@@ -84,7 +87,7 @@ namespace Restaurante.APP.ExternalServices
             {
                 throw ex;
             }
-        }
+        } 
         #endregion
     }
 }

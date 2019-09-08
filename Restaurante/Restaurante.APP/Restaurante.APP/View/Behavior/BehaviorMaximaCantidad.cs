@@ -25,7 +25,8 @@ namespace Restaurante.APP.View.Behavior
         protected void Unfocused(object sender, FocusEventArgs e)
         {
             Entry EntryLenght = sender as Entry;
-
+            if (string.IsNullOrEmpty(EntryLenght.Text))
+                return;
             EntryLenght.Text = EntryLenght.Text.Substring(0, MaxLength);
         }
     }

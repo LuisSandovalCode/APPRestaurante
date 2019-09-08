@@ -37,15 +37,15 @@
                        Placeholder="Correo Electrónico">
                     <Entry.Behaviors>
                         <Validacion:BehaviorValidacionCorreo
-                            EsCorreoValido="{Binding EsCorreoValido}"/>
+                            EsCorreoValido="{Binding Source={x:Reference RegistrarUsuario}, 
+                                              Path=BindingContext.EsCorreoValido, Mode=OneWayToSource}"/>
                     </Entry.Behaviors>
                 </Entry>
             </StackLayout>
 
             <StackLayout Orientation="Vertical">
                 <Entry Text="{Binding Usuario.Telefono}"
-                       Placeholder="Número de Teléfono"
-                       Keyboard="Numeric">
+                       Placeholder="Número de Teléfono">
                     <Entry.Behaviors>
                         <Validacion:BehaviorTelefonoValidacion
                             EsTelefonoValido="{Binding Source={x:Reference RegistrarUsuario}, 
@@ -64,9 +64,9 @@
             <StackLayout Orientation="Vertical">
                 <Entry x:Name="txtContrasena"
                        Text="{Binding Usuario.Contrasena}"
-                       Placeholder="Contraseña">
+                       Placeholder="Contraseña"
+                       IsPassword="True">
                     <Entry.Behaviors>
-                        <Validacion:BehaviorContrasenaValidacion/>
                         <Validacion:BehaviorCompacionTexto 
                             EsContrasenaIgual="{Binding Source={x:Reference RegistrarUsuario}, 
                                                 Path=BindingContext.EsContrasenaIgual, Mode=OneWayToSource}"
@@ -80,16 +80,15 @@
             <StackLayout Orientation="Vertical">
                 <Entry
                     x:Name="txtRepetirContrasena"
-                    Text=""
-                    Placeholder="Repetir Contraseña">
+                    Placeholder="Repetir Contraseña"
+                    IsPassword="True">
                     <Entry.Behaviors>
-                        <Validacion:BehaviorContrasenaValidacion/>
                         <Validacion:BehaviorCompacionTexto
                             EsContrasenaIgual="{Binding Source={x:Reference RegistrarUsuario}, 
                                                 Path=BindingContext.EsContrasenaIgual, Mode=OneWayToSource}"
                             BindingContext="{x:Reference txtContrasena}"
                             Text="{Binding Text}"
-                            Ent="{x:Reference txtContrasena}"/>
+                            />
                     </Entry.Behaviors>
                 </Entry>
             </StackLayout>

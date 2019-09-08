@@ -110,25 +110,51 @@ namespace Restaurante.APP.ViewModel.Usuario
 
         public async void RegistrarUsuario()
         {
-            if (!EsContrasenaIgual)
-                await App.Current.MainPage.DisplayAlert("Restaurante", "Las contraseñas no coinciden", "Ok");
-            if(!EsCorreoValido)
-                await App.Current.MainPage.DisplayAlert("Restaurante", "El correo no es valido", "Ok");
-            if(!EsTelefonoValido)
-                await App.Current.MainPage.DisplayAlert("Restaurante", "El teléfono no es valido", "Ok");
+            try
+            {
+                if (!EsContrasenaIgual)
+                {
+                    await App.Current.MainPage.DisplayAlert("Restaurante", "Las contraseñas no coinciden", "Ok");
+                    isLoading = false;
+                    EsCorreoValido = false;
+                    EsTelefonoValido = false;
+                    return;
+                }
+                if (!EsCorreoValido)
+                {
+                    await App.Current.MainPage.DisplayAlert("Restaurante", "El correo no es valido", "Ok");
+                    isLoading = false;
+                    return;
+                }
 
-            isLoading = true;
+                if (!EsTelefonoValido)
+                {
+                    await App.Current.MainPage.DisplayAlert("Restaurante", "El teléfono no es valido", "Ok");
+                    isLoading = false;
+                    EsContrasenaIgual = false;
+                    EsCorreoValido = false;
+                    return;
+                }
 
-            string JsonUsuario = JsonConvert.SerializeObject(Usuario);
 
-            bool RegistroUsuario = await ServicioUsuario.RegistrarUsuario(JsonUsuario);
+                isLoading = true;
 
-            isLoading = false;
+                string JsonUsuario = JsonConvert.SerializeObject(Usuario);
 
-            if(RegistroUsuario)
-                await App.Current.MainPage.DisplayAlert("Restaurante", "Usuario Registrado con éxito", "Ok");
-            else
-                await App.Current.MainPage.DisplayAlert("Restaurante", "Error al registrar usuario, por favor verifique los datos", "Ok");
+                bool RegistroUsuario = await ServicioUsuario.RegistrarUsuario(JsonUsuario);
+
+                isLoading = false;
+
+                if (RegistroUsuario)
+                    await App.Current.MainPage.DisplayAlert("Restaurante", "Usuario Registrado con éxito", "Ok");
+                else
+                    await App.Current.MainPage.DisplayAlert("Restaurante", "Error al registrar usuario, por favor verifique los datos", "Ok");
+            }
+            catch (Exception ex)
+            {
+                isLoading = false;
+                await App.Current.MainPage.DisplayAlert("Restaurante", $"Error {ex.Message}", "Ok");
+            }
 
         } 
         #endregion

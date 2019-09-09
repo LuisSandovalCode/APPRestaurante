@@ -20,8 +20,6 @@ namespace Restaurante.APP.Model.Usuario
 
         public int Telefono { get; set; }
 
-        public string CodigoArea { get; set; }
-
         public DateTime FechaNacimiento { get; set; }
 
         public string Contrasena { get; set; }

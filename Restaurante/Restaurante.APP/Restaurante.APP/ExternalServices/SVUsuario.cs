@@ -50,6 +50,43 @@ namespace Restaurante.APP.ExternalServices
             {
                 throw ex;
             }
+        }
+        #endregion
+
+        #region [Registrar Usuario]
+        /// <summary>
+        /// Método Http Async, que permita registrar un usuario 
+        /// dentro de la aplicación
+        /// </summary>
+        /// <param name="JsonUsuario"></param>
+        /// <returns></returns>
+        public async Task<bool> RegistrarUsuario(string JsonUsuario)
+        {
+            string URLRegistrarUsuario = URLWebApi + Controller + nameof(RegistrarUsuario);
+            bool UsuarioRegistrado = false;
+            try
+            {
+                using (var ClienteHttp = new HttpClient())
+                {
+                    var vloRespuesta = await ClienteHttp.PostAsync(URLRegistrarUsuario,
+                        new StringContent(JsonUsuario,Encoding.UTF8,"application/json"));
+
+                    if(vloRespuesta.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string JsonRespuesta = await vloRespuesta.Content.ReadAsStringAsync();
+                        UsuarioRegistrado = Convert.ToBoolean(JsonRespuesta);
+                    }
+
+                    if (vloRespuesta.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                        throw new Exception("Servicio no disponible, intentelo más tarde");
+                }
+
+                return UsuarioRegistrado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         } 
         #endregion
     }

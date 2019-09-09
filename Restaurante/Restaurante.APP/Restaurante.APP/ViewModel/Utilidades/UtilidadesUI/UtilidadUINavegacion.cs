@@ -18,6 +18,7 @@ namespace Restaurante.APP.ViewModel.Utilidades.UtilidadesUI
             };
         }
 
+        
         /// <summary>
         /// Aplica un push sobre el MasterDetailPage
         /// </summary>

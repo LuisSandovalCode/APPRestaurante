@@ -147,7 +147,7 @@ namespace Restaurante.APP.ViewModel.Usuario
 
         public void EnterRegistrarUsuario()
         {
-            UtilidadNavegacionUI.IrAView(new NuevoUsuarioView());
+            App.Current.MainPage = new NuevoUsuarioView();
         }
 
         public async Task RegistrarCredenciales()

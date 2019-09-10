@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurante.APP.ViewModel.Usuario;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace Restaurante.APP.View.Usuario
         public NuevoUsuarioView()
         {
             InitializeComponent();
+
+            BindingContext = new NuevoUsuarioViewModel();
         }
     }
 }

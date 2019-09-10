@@ -90,35 +90,59 @@ namespace Restaurante.APP.ViewModel.Usuario
         #region [Metodos]
         public async void IniciarSesion()
         {
-            if (EsContrasenaValida && EsCorreoValido)
-            {
-                IsLoading = true;
-                string JsonLogin = JsonConvert.SerializeObject(UsuarioLogin);
-                string JsonRespuesta = await ServicioUsuario.IniciarSesion(JsonLogin);
-                if (!string.IsNullOrEmpty(JsonRespuesta))
-                {
-                    IsLoading = false;
-                    await App.Current.MainPage.DisplayAlert("Restaurante", "Bienvenido", "Ok");
-                    bool ExistenCredenciales = ServicioReal.ValidarCredenciales(UsuarioLogin);
-                    if (!ExistenCredenciales)
-                    {
-                        IsLoading = true;
-                        await RegistrarCredenciales();
-                        IsLoading = false;
-                    }
-                    UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
-                    utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("Restaurante", "Error en las credenciales", "Ok");
-                }
 
+            //if (EsContrasenaValida && EsCorreoValido)
+            //{
+            //    IsLoading = true;
+            //    string JsonLogin = JsonConvert.SerializeObject(UsuarioLogin);
+            //    string JsonRespuesta = await ServicioUsuario.IniciarSesion(JsonLogin);
+            //    if (!string.IsNullOrEmpty(JsonRespuesta))
+            //    {
+            //        IsLoading = false;
+            //        await App.Current.MainPage.DisplayAlert("Restaurante", "Bienvenido", "Ok");
+            //        bool ExistenCredenciales = ServicioReal.ValidarCredenciales(UsuarioLogin);
+            //        if (!ExistenCredenciales)
+            //        {
+            //            IsLoading = true;
+            //            await RegistrarCredenciales();
+            //            IsLoading = false;
+            //        }
+            //        UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
+            //        utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
+            //    }
+            //    else
+            //    {
+            //        await App.Current.MainPage.DisplayAlert("Restaurante", "Error en las credenciales", "Ok");
+            //    }
+
+            //}
+            //else
+            //{
+            //    await App.Current.MainPage.DisplayAlert("Restaurante", "Datos No Correctos", "Ok");
+            //}
+
+            IsLoading = true;
+            string JsonLogin = JsonConvert.SerializeObject(UsuarioLogin);
+            string JsonRespuesta = await ServicioUsuario.LogearUsuario(JsonLogin);
+            if (!string.IsNullOrEmpty(JsonRespuesta))
+            {
+                IsLoading = false;
+                await App.Current.MainPage.DisplayAlert("Restaurante", "Bienvenido", "Ok");
+                bool ExistenCredenciales = ServicioReal.ValidarCredenciales(UsuarioLogin);
+                if (!ExistenCredenciales)
+                {
+                    IsLoading = true;
+                    await RegistrarCredenciales();
+                    IsLoading = false;
+                }
+                UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
+                utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Restaurante", "Datos No Correctos", "Ok");
+                await App.Current.MainPage.DisplayAlert("Restaurante", "Error en las credenciales", "Ok");
             }
+
         }
 
         public void EnterRegistrarUsuario()
@@ -130,9 +154,9 @@ namespace Restaurante.APP.ViewModel.Usuario
         {
             var Confirmacion = await App.Current.MainPage.DisplayAlert("Restaurante", "¿Desea registrar sus credenciales la próxima vez?", "Sí", "No");
 
-            if(Confirmacion)
+            if (Confirmacion)
             {
-                 bool RegistroCrendenciales = ServicioReal.GuardarCredenciales(UsuarioLogin);
+                bool RegistroCrendenciales = ServicioReal.GuardarCredenciales(UsuarioLogin);
 
                 if (!RegistroCrendenciales)
                     await App.Current.MainPage.DisplayAlert("Restaurante", "Error al registrar credenciales", "Ok");
@@ -151,7 +175,7 @@ namespace Restaurante.APP.ViewModel.Usuario
             _UsuarioLogin = ServicioReal.RecordarCredenciales();
             IniciarSesionCommand = new Command(IniciarSesion);
             EnterRegistrarUsuarioCommand = new Command(EnterRegistrarUsuario);
-        } 
+        }
         #endregion
     }
 }

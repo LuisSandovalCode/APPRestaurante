@@ -9,9 +9,21 @@
              Title="Menu principal">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Menu principal cargar lista"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="Lista" ItemsSource="{Binding ListaOpcionesMenu}">
+                <!--Asignar template-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!--Si se pasa un . en CommandParameter se pasa el objeto completo-->
+                        <!--El comando se especifica brindando un ruta absoluta-->
+                        <ImageCell 
+                            Text="{Binding Nombre}" 
+                            Detail="{Binding Detalle}" 
+                            ImageSource="{Binding IconoAndroid}"
+                            Command="{Binding Path=BindingContext.ImplemetarHomeMenuCommand, Source={x:Reference MenuPrincipal}}"
+                            CommandParameter="{Binding Id}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

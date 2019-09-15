@@ -90,37 +90,6 @@ namespace Restaurante.APP.ViewModel.Usuario
         #region [Metodos]
         public async void IniciarSesion()
         {
-
-            //if (EsContrasenaValida && EsCorreoValido)
-            //{
-            //    IsLoading = true;
-            //    string JsonLogin = JsonConvert.SerializeObject(UsuarioLogin);
-            //    string JsonRespuesta = await ServicioUsuario.IniciarSesion(JsonLogin);
-            //    if (!string.IsNullOrEmpty(JsonRespuesta))
-            //    {
-            //        IsLoading = false;
-            //        await App.Current.MainPage.DisplayAlert("Restaurante", "Bienvenido", "Ok");
-            //        bool ExistenCredenciales = ServicioReal.ValidarCredenciales(UsuarioLogin);
-            //        if (!ExistenCredenciales)
-            //        {
-            //            IsLoading = true;
-            //            await RegistrarCredenciales();
-            //            IsLoading = false;
-            //        }
-            //        UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
-            //        utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
-            //    }
-            //    else
-            //    {
-            //        await App.Current.MainPage.DisplayAlert("Restaurante", "Error en las credenciales", "Ok");
-            //    }
-
-            //}
-            //else
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Restaurante", "Datos No Correctos", "Ok");
-            //}
-
             IsLoading = true;
             string JsonLogin = JsonConvert.SerializeObject(UsuarioLogin);
             string JsonRespuesta = await ServicioUsuario.LogearUsuario(JsonLogin);
@@ -135,8 +104,7 @@ namespace Restaurante.APP.ViewModel.Usuario
                     await RegistrarCredenciales();
                     IsLoading = false;
                 }
-                UtilidadNavegacionUI utilidadNavegacionUI = new UtilidadNavegacionUI();
-                utilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
+                UtilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
             }
             else
             {

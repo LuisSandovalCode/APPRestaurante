@@ -19,7 +19,7 @@
                             Text="{Binding Nombre}" 
                             Detail="{Binding Detalle}" 
                             ImageSource="{Binding IconoAndroid}"
-                            Command="{Binding Path=BindingContext.ImplemetarHomeMenuCommand, Source={x:Reference MenuPrincipal}}"
+                            Command="{Binding Path=BindingContext.EjecutarHomeMenuCommand, Source={x:Reference MenuPrincipal}}"
                             CommandParameter="{Binding Id}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>

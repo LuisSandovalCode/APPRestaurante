@@ -1,6 +1,7 @@
 ﻿using Restaurante.APP.Model.Configuracion;
 using Restaurante.APP.Model.Home;
 using Restaurante.APP.ViewModel.Utilidades;
+using Restaurante.APP.ViewModel.Utilidades.UtilidadesUI;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -34,6 +35,8 @@ namespace Restaurante.APP.ViewModel.Home
         protected void IntegrarInicializacionClase()
         {
             InicializarMenu();
+            InicializarCommands();
+
         }
         protected void InicializarMenu()
         {
@@ -80,7 +83,7 @@ namespace Restaurante.APP.ViewModel.Home
                     break;
 
                 case (int)EnumHomeMenu.CerrarSesion:
-
+                    UtilidadNavegacionUI.IrAView(new View.Usuario.LoginView());
                     break;
             }
         }

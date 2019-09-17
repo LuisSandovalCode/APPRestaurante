@@ -9,8 +9,11 @@
              x:Name="MenuPrincipal"
              Title="Menu principal">
     <ContentPage.Content>
+          <OnPlatform x:TypeArguments="StackLayout">
+            <OnPlatform.Platforms>
+                <On Platform="iOS">
         <StackLayout>
-            <ListView x:Name="Lista" ItemsSource="{Binding ListaOpcionesMenu}">
+            <ListView x:Name="ListaIOS" ItemsSource="{Binding ListaOpcionesMenu}">
                 <ListView.Header>
                     <StackLayout BackgroundColor="Aqua">
                         <Grid>
@@ -54,6 +57,61 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
+  </StackLayout>
+                  </On>
+              
+                  <OnPlatform x:TypeArguments="StackLayout">
+            <OnPlatform.Platforms>
+                <On Platform="Android">
+        <StackLayout>
+            <ListView x:Name="ListaAndroid" ItemsSource="{Binding ListaOpcionesMenu}">
+                <ListView.Header>
+                    <StackLayout BackgroundColor="Aqua">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Circle:CircleImage
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                WidthRequest ="80"
+                                HeightRequest="80"
+                                Source="{Binding FotoPerfil}"
+                                Aspect="AspectFit"
+                            />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding NombreUsuario}"
+                                FontFamily="Arial"
+                                TextColor="Black"
+                            />
+                        </Grid>
+                    </StackLayout>
+                </ListView.Header>
+                <!--Asignar template-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!--Si se pasa un . en CommandParameter se pasa el objeto completo-->
+                        <!--El comando se especifica brindando un ruta absoluta-->
+                        <ImageCell 
+                            Text="{Binding Nombre}" 
+                            Detail="{Binding Detalle}" 
+                            ImageSource="{Binding IconoAndroid}"
+                            Command="{Binding Path=BindingContext.EjecutarHomeMenuCommand, Source={x:Reference MenuPrincipal}}"
+                            CommandParameter="{Binding Id}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+  </StackLayout>
+                  </On>   
+              <On Platform="UWP"/>
+                  </OnPlatform.Platforms>
+        </OnPlatform>
     </ContentPage.Content>
 </ContentPage>

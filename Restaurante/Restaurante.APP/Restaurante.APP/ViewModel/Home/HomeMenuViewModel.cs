@@ -32,7 +32,7 @@ namespace Restaurante.APP.ViewModel.Home
         #region :::: Métodos ::::
 
         #region [Inicialización]
-        protected HomeMenuViewModel()
+        public HomeMenuViewModel()
         {
             IntegrarInicializacionClase();
         }
@@ -45,11 +45,51 @@ namespace Restaurante.APP.ViewModel.Home
         protected void InicializarMenu()
         {
             ListaOpcionesMenu = new ObservableCollection<HomeMenu>();
-            ListaOpcionesMenu.Add(new HomeMenu((int)EnumHomeMenu.Reservar, "Reservar", "Reserve su restaurante y disfrute", ConfigAndroid.HomeIconoReservar, ConfigIOS.HomeIconoReservar));
-            ListaOpcionesMenu.Add(new HomeMenu((int)EnumHomeMenu.VerReservaciones, "Ver reservaciones", "Observer las reservaciones realizadas", ConfigAndroid.HomeIconoVerReservaciones, ConfigIOS.HomeIconoVerReservaciones));
-            ListaOpcionesMenu.Add(new HomeMenu((int)EnumHomeMenu.Contactar, "Contactar", "Conctácte al restaurante", ConfigAndroid.HomeIconoContactar, ConfigIOS.HomeIconoContactar));
-            ListaOpcionesMenu.Add(new HomeMenu((int)EnumHomeMenu.Informacion, "Información", "Detalles de uso de la aplicación", ConfigAndroid.HomeIconoInformacion, ConfigIOS.HomeIconoInformacion));
-            ListaOpcionesMenu.Add(new HomeMenu((int)EnumHomeMenu.CerrarSesion, "Cerrar sesión", "", ConfigAndroid.HomeIconoLogout, ConfigIOS.HomeIconoLogout));
+
+            ListaOpcionesMenu.Add(new HomeMenu
+            {
+                Id = (int)EnumHomeMenu.Reservar,
+                Nombre = "Reservar",
+                Detalle = "Reserve su restaurante y disfrute",
+                IconoAndroid = ConfigAndroid.MenuIconReservar,
+                IconoIOS = ConfigIOS.MenuIconReservar
+            });
+
+            ListaOpcionesMenu.Add(new HomeMenu
+            {
+                Id = (int)EnumHomeMenu.VerReservaciones,
+                Nombre = "Ver reservaciones",
+                Detalle = "Observer las reservaciones realizadas",
+                IconoAndroid = ConfigAndroid.MenuIconVerReservaciones,
+                IconoIOS = ConfigIOS.MenuIconVerReservaciones
+            });
+
+            ListaOpcionesMenu.Add(new HomeMenu
+            {
+                Id = (int)EnumHomeMenu.Contactar,
+                Nombre = "Contactar",
+                Detalle = "Conctacte al restaurante",
+                IconoAndroid = ConfigAndroid.MenuIconContactar,
+                IconoIOS = ConfigIOS.MenuIconContactar
+            });
+
+
+            ListaOpcionesMenu.Add(new HomeMenu
+            {
+                Id = (int)EnumHomeMenu.Informacion,
+                Nombre = "Información",
+                Detalle = "Detalles de uso de la aplicación",
+                IconoAndroid = ConfigAndroid.MenuIconInformacion,
+                IconoIOS = ConfigIOS.MenuIconInformacion
+            });
+
+            ListaOpcionesMenu.Add(new HomeMenu
+            {
+                Id = (int)EnumHomeMenu.CerrarSesion,
+                Nombre = "Cerrar sesión",
+                IconoAndroid = ConfigAndroid.MenuIconLogout,
+                IconoIOS = ConfigIOS.MenuIconLogout
+            });
         }
         protected void InicializarCommands()
         {

@@ -1,14 +1,14 @@
 ﻿namespace Restaurante.APP.Model.Configuracion
 {
-    public class ConfigAndroid
+    public static class ConfigAndroid
     {
         #region Home
-        private static string RutaResourceHome = "";
-        public static string HomeIconoReservar = RutaResourceHome + "Reservar.png";
-        public static string HomeIconoVerReservaciones = RutaResourceHome + "VerReservaciones.png";
-        public static string HomeIconoContactar = RutaResourceHome + "Contactar.png";
-        public static string HomeIconoInformacion = RutaResourceHome + "Informacion.png";
-        public static string HomeIconoLogout = RutaResourceHome + "Logout.png";
+        private static string RutaResourceHome = string.Empty;
+        public static string MenuIconReservar = RutaResourceHome + "add.png";
+        public static string MenuIconVerReservaciones = RutaResourceHome + "doc.png";
+        public static string MenuIconContactar = RutaResourceHome + "email.png";
+        public static string MenuIconInformacion = RutaResourceHome + "info.png";
+        public static string MenuIconLogout = RutaResourceHome + "logout.png";
         #endregion Home
     }
 }

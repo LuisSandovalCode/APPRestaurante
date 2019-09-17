@@ -13,6 +13,10 @@ namespace Restaurante.APP.ViewModel.Home
         #region :::: Atributos y Objetos ::::
         private static HomeMenuViewModel Instancia = null;
 
+        public  ImageSource FotoPerfil { get; set; }
+
+        public  string NombreUsuario { get; set; }
+
         private ObservableCollection<HomeMenu> listaOpcionesMenu = new ObservableCollection<HomeMenu>();
         public ObservableCollection<HomeMenu> ListaOpcionesMenu
         {
@@ -123,7 +127,7 @@ namespace Restaurante.APP.ViewModel.Home
                     break;
 
                 case (int)EnumHomeMenu.CerrarSesion:
-                    UtilidadNavegacionUI.IrAView(new View.Usuario.LoginView());
+                    UtilidadNavegacionUI.CerrarSession(new View.Usuario.LoginView());
                     break;
             }
         }

@@ -41,7 +41,7 @@ namespace Restaurante.APP.ExternalServices
                         Encoding.UTF8, "application/json"));
 
                     if (vloHttpRespuesta.StatusCode == System.Net.HttpStatusCode.OK)
-                        vlcJsonRespuesta = await vloHttpRespuesta.Content.ReadAsStringAsync();
+                        vlcJsonRespuesta =  vloHttpRespuesta.Content.ReadAsStringAsync().Result;
                 }
 
                 return vlcJsonRespuesta;

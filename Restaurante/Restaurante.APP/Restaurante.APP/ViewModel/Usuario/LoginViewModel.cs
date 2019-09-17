@@ -4,17 +4,21 @@ using Restaurante.APP.ExternalServices;
 using Restaurante.APP.Model.Usuario;
 using Restaurante.APP.View.Home;
 using Restaurante.APP.View.Usuario;
+using Restaurante.APP.ViewModel.Home;
 using Restaurante.APP.ViewModel.Utilidades;
 using Restaurante.APP.ViewModel.Utilidades.UtilidadesUI;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-
+using System.IO;
+using System;
 namespace Restaurante.APP.ViewModel.Usuario
 {
     public class LoginViewModel : PropiedadNotificacion
     {
         #region [Propiedades]
+
+        public static HomeMenuView _InstanceHomeView { get; set; }
 
         private static RealmService ServicioReal;
 
@@ -104,6 +108,10 @@ namespace Restaurante.APP.ViewModel.Usuario
                     await RegistrarCredenciales();
                     IsLoading = false;
                 }
+                UsuarioModel vloUsuario = JsonConvert.DeserializeObject<UsuarioModel>(JsonRespuesta);
+                byte[] vloFotoPerfil = Convert.FromBase64String(vloUsuario.FotoPerfil);
+                HomeMenuViewModel.ObtenerInstancia().FotoPerfil = ImageSource.FromStream(()=>new MemoryStream(vloFotoPerfil));
+                HomeMenuViewModel.ObtenerInstancia().NombreUsuario = vloUsuario.Nombre + "  "+vloUsuario.Apellido;
                 UtilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
             }
             else

@@ -109,6 +109,7 @@ namespace Restaurante.APP.ViewModel.Usuario
             else
             {
                 await App.Current.MainPage.DisplayAlert("Restaurante", "Error en las credenciales", "Ok");
+                IsLoading = false;
             }
 
         }

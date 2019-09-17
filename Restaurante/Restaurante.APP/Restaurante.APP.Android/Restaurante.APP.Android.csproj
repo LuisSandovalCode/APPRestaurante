@@ -71,10 +71,30 @@
     <Compile Include="Servicios\GaleriaServicio.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Contactar.png" />
-    <AndroidResource Include="Resources\drawable\Informacion.png" />
-    <AndroidResource Include="Resources\drawable\BuscarRestauran.png" />
-    <AndroidResource Include="Resources\drawable\VerReservaciones.png" />
+    <AndroidResource Include="Resources\drawable\search.png">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\email.png">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\info.png">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\logout.png">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\add.png">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\doc.png">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\Tabbar.axml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -153,12 +173,6 @@
       <Project>{8885B471-D3FE-4976-8A73-966E3B5B10E6}</Project>
       <Name>Restaurante.APP</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Logout.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Reservar.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\user.png" />

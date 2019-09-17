@@ -8,22 +8,43 @@
              x:Name="MenuPrincipal"
              Title="Menu principal">
     <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="Lista" ItemsSource="{Binding ListaOpcionesMenu}">
-                <!--Asignar template-->
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <!--Si se pasa un . en CommandParameter se pasa el objeto completo-->
-                        <!--El comando se especifica brindando un ruta absoluta-->
-                        <ImageCell 
-                            Text="{Binding Nombre}" 
-                            Detail="{Binding Detalle}" 
-                            ImageSource="{Binding IconoAndroid}"
-                            Command="{Binding Path=BindingContext.EjecutarHomeMenuCommand, Source={x:Reference MenuPrincipal}}"
-                            CommandParameter="{Binding Id}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <OnPlatform x:TypeArguments="StackLayout">
+            <OnPlatform.Platforms>
+                <On Platform="iOS">
+                    <StackLayout>
+                        <ListView x:Name="ListaIOS" ItemsSource="{Binding ListaOpcionesMenu}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ImageCell 
+                                        Text="{Binding Nombre}" 
+                                        Detail="{Binding Detalle}" 
+                                        ImageSource="{Binding IconoIOS}"
+                                        Command="{Binding Path=BindingContext.EjecutarHomeMenuCommand, Source={x:Reference MenuPrincipal}}"
+                                        CommandParameter="{Binding Id}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </On>
+                <On Platform="Android" >
+                    <StackLayout>
+                        <ListView x:Name="ListaAndroid" ItemsSource="{Binding ListaOpcionesMenu}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ImageCell 
+                                        Text="{Binding Nombre}" 
+                                        Detail="{Binding Detalle}" 
+                                        ImageSource="{Binding IconoAndroid}"
+                                        Command="{Binding Path=BindingContext.EjecutarHomeMenuCommand, Source={x:Reference MenuPrincipal}}"
+                                        CommandParameter="{Binding Id}"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </On>
+                <On Platform="UWP"/>
+            </OnPlatform.Platforms>
+        </OnPlatform>
+
     </ContentPage.Content>
 </ContentPage>

@@ -16,13 +16,5 @@
             IconoAndroid = string.Empty;
             IconoIOS = string.Empty;
         }
-        public HomeMenu(int Id, string Nombre, string Detalle, string IconoAndroid, string IconoIOS)
-        {
-            this.Id = Id;
-            this.Nombre = Nombre;
-            this.Detalle = Detalle;
-            this.IconoAndroid = IconoAndroid;
-            this.IconoIOS = IconoIOS;
-        }
     }
 }

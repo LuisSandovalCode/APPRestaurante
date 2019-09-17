@@ -3,12 +3,12 @@
     public class ConfigIOS
     {
         #region Home
-        private static string RutaResourceHome = "" /***PorDefinir***/;
-        public static string HomeIconoReservar = RutaResourceHome + "Reservar.png";
-        public static string HomeIconoVerReservaciones = RutaResourceHome + "VerReservaciones.png";
-        public static string HomeIconoContactar = RutaResourceHome + "Contactar.png";
-        public static string HomeIconoInformacion = RutaResourceHome + "Informacion.png";
-        public static string HomeIconoLogout = RutaResourceHome + "Logout.png";
+        private static string RutaResourceHome = "";
+        public static string MenuIconReservar = RutaResourceHome + "Reservar.png";
+        public static string MenuIconVerReservaciones = RutaResourceHome + "VerReservaciones.png";
+        public static string MenuIconContactar = RutaResourceHome + "Contactar.png";
+        public static string MenuIconInformacion = RutaResourceHome + "Informacion.png";
+        public static string MenuIconLogout = RutaResourceHome + "Logout.png";
         #endregion Home
     }
 }

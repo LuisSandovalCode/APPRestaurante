@@ -5778,26 +5778,26 @@ namespace Restaurante.APP.Droid
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f02013b
-			public const int avd_hide_password_1 = 2130837819;
-			
 			// aapt resource value: 0x7f02013c
-			public const int avd_hide_password_2 = 2130837820;
+			public const int avd_hide_password_1 = 2130837820;
 			
 			// aapt resource value: 0x7f02013d
-			public const int avd_hide_password_3 = 2130837821;
+			public const int avd_hide_password_2 = 2130837821;
+			
+			// aapt resource value: 0x7f02013e
+			public const int avd_hide_password_3 = 2130837822;
 			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
 			
-			// aapt resource value: 0x7f02013e
-			public const int avd_show_password_1 = 2130837822;
-			
 			// aapt resource value: 0x7f02013f
-			public const int avd_show_password_2 = 2130837823;
+			public const int avd_show_password_1 = 2130837823;
 			
 			// aapt resource value: 0x7f020140
-			public const int avd_show_password_3 = 2130837824;
+			public const int avd_show_password_2 = 2130837824;
+			
+			// aapt resource value: 0x7f020141
+			public const int avd_show_password_3 = 2130837825;
 			
 			// aapt resource value: 0x7f020056
 			public const int BuscarRestauran = 2130837590;
@@ -6462,11 +6462,11 @@ namespace Restaurante.APP.Droid
 			// aapt resource value: 0x7f020132
 			public const int notification_icon_background = 2130837810;
 			
-			// aapt resource value: 0x7f020139
-			public const int notification_template_icon_bg = 2130837817;
-			
 			// aapt resource value: 0x7f02013a
-			public const int notification_template_icon_low_bg = 2130837818;
+			public const int notification_template_icon_bg = 2130837818;
+			
+			// aapt resource value: 0x7f02013b
+			public const int notification_template_icon_low_bg = 2130837819;
 			
 			// aapt resource value: 0x7f020133
 			public const int notification_tile_bg = 2130837811;
@@ -6484,7 +6484,10 @@ namespace Restaurante.APP.Droid
 			public const int tooltip_frame_light = 2130837815;
 			
 			// aapt resource value: 0x7f020138
-			public const int VerReservaciones = 2130837816;
+			public const int user = 2130837816;
+			
+			// aapt resource value: 0x7f020139
+			public const int VerReservaciones = 2130837817;
 			
 			static Drawable()
 			{
@@ -9471,7 +9474,10 @@ namespace Restaurante.APP.Droid
 		{
 			
 			// aapt resource value: 0x7f080000
-			public const int xamarin_essentials_fileprovider_file_paths = 2131230720;
+			public const int network_security_config = 2131230720;
+			
+			// aapt resource value: 0x7f080001
+			public const int xamarin_essentials_fileprovider_file_paths = 2131230721;
 			
 			static Xml()
 			{

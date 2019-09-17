@@ -92,7 +92,7 @@ namespace Restaurante.APP.ViewModel.Usuario
         {
             IsLoading = true;
             string JsonLogin = JsonConvert.SerializeObject(UsuarioLogin);
-            string JsonRespuesta = await ServicioUsuario.LogearUsuario(JsonLogin);
+            string JsonRespuesta = await ServicioUsuario.IniciarSesion(JsonLogin);
             if (!string.IsNullOrEmpty(JsonRespuesta))
             {
                 IsLoading = false;

@@ -23,5 +23,7 @@ namespace Restaurante.APP.Model.Usuario
         public DateTime FechaNacimiento { get; set; }
 
         public string Contrasena { get; set; }
+
+        public string FotoPerfil { get; set; }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Restaurante.APP.ExternalServices;
+using Restaurante.APP.Interfaces;
 using Restaurante.APP.Model.Usuario;
 using Restaurante.APP.ViewModel.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -15,6 +17,24 @@ namespace Restaurante.APP.ViewModel.Usuario
     {
 
         #region [Propiedades]
+
+        public static string Base64Foto { get; set; }
+
+        public Stream _StreamFoto { get; set; }
+
+        public Stream StreamFoto
+        {
+            get
+            {
+                return _StreamFoto;
+            }
+
+            set
+            {
+                _StreamFoto = value;
+                OnPropertyChanged("StreamFoto");
+            }
+        }
 
         public bool _isLoading { get; set; }
 
@@ -30,7 +50,26 @@ namespace Restaurante.APP.ViewModel.Usuario
         public DateTime FechaMinima { get => DateTime.Now.AddYears(-50); }
         public UsuarioModel _Usuario { get; set; }
 
+        public string _FotoPerfilBase64 { get; set; }
+        public ImageSource _FotoPerfil { get; set; }
         public ICommand RegistrarUsuarioCommand { get; set; }
+
+        public ICommand SeleccionarFotoPerfilCommand { get; set; }
+
+        public string FotoPerfilBase64
+        {
+            set
+            {
+                _FotoPerfilBase64 = value;
+                OnPropertyChanged("FotoPerfilBase64");
+            }
+
+            get
+            {
+                return _FotoPerfilBase64;
+            }
+        }
+
         public UsuarioModel Usuario
         {
             get
@@ -42,6 +81,19 @@ namespace Restaurante.APP.ViewModel.Usuario
             {
                 _Usuario = value;
                 OnPropertyChanged("Usuario");
+            }
+        }
+
+        public ImageSource FotoPerfil
+        {
+            set
+            {
+                _FotoPerfil = value;
+                OnPropertyChanged("FotoPerfil");
+            }
+            get
+            {
+                return _FotoPerfil;
             }
         }
 
@@ -106,6 +158,7 @@ namespace Restaurante.APP.ViewModel.Usuario
                 ServicioUsuario = new SVUsuario();
             _Usuario = new UsuarioModel();
             RegistrarUsuarioCommand = new Command(RegistrarUsuario);
+            SeleccionarFotoPerfilCommand = new Command(SeleccionarFotoPerfil);
         }
 
         public async void RegistrarUsuario()
@@ -136,6 +189,10 @@ namespace Restaurante.APP.ViewModel.Usuario
                     return;
                 }
 
+                if (!string.IsNullOrEmpty(Base64Foto))
+                {
+                    Usuario.FotoPerfil = Base64Foto;
+                }
 
                 isLoading = true;
 
@@ -156,7 +213,38 @@ namespace Restaurante.APP.ViewModel.Usuario
                 await App.Current.MainPage.DisplayAlert("Restaurante", $"Error {ex.Message}", "Ok");
             }
 
-        } 
+        }
+
+        public async void SeleccionarFotoPerfil()
+        {
+            try
+            {
+                isLoading = true;
+
+                StreamFoto = await DependencyService.Get<IFotoPicker>().ObtenerFotoGaleriaAsync();
+
+                if(StreamFoto != null)
+                {
+
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        StreamFoto.CopyTo(memory);
+                        Base64Foto = Convert.ToBase64String(memory.ToArray());
+                    }
+                    StreamFoto = null;
+                    byte[] Base64Stream = Convert.FromBase64String(Base64Foto);
+                    FotoPerfil = ImageSource.FromStream(()=>new MemoryStream(Base64Stream));
+
+                }
+                isLoading = false;
+
+            }
+            catch (Exception ex)
+            {
+                isLoading = false;
+                await App.Current.MainPage.DisplayAlert("Restaurante", $"Error {ex.Message}", "Ok");
+            }
+        }
         #endregion
 
     }

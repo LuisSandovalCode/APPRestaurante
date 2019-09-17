@@ -27,12 +27,12 @@ namespace Restaurante.APP.ExternalServices
         /// </summary>
         /// <param name="pvcJsonInicioSesion"></param>
         /// <returns></returns>
-        public async Task<string> LogearUsuario(string pvcJsonInicioSesion)
+        public async Task<string> IniciarSesion(string pvcJsonInicioSesion)
         {
             try
             {
                 string vlcJsonRespuesta = string.Empty;
-                string URLInicioSesion = URLWebApi + Controller + nameof(LogearUsuario);
+                string URLInicioSesion = URLWebApi + Controller + nameof(IniciarSesion);
 
                 using (var vloClienteHttp = new HttpClient())
                 {

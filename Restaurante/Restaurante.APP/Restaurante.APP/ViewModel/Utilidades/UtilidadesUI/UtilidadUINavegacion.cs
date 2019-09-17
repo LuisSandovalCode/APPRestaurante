@@ -1,5 +1,4 @@
 ﻿using Xamarin.Forms;
-
 namespace Restaurante.APP.ViewModel.Utilidades.UtilidadesUI
 {
     public class UtilidadNavegacionUI
@@ -32,6 +31,11 @@ namespace Restaurante.APP.ViewModel.Utilidades.UtilidadesUI
         public static void VolverDeView()
         {
             ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PopAsync();//Se devuelve a la anterior
+        }
+
+        public static void CerrarSession(Page vloPage)
+        {
+            App.Current.MainPage = vloPage;
         }
     }
 }

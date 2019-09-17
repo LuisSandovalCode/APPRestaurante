@@ -4,104 +4,179 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Validacion="clr-namespace:Restaurante.APP.View.Behavior"
+             xmlns:Circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              mc:Ignorable="d"
              x:Class="Restaurante.APP.View.Usuario.NuevoUsuarioView"
              BackgroundColor="SkyBlue"
              x:Name="RegistrarUsuario">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical"
-                     VerticalOptions="CenterAndExpand">
-            
-            <StackLayout Orientation="Vertical">
-                <Entry Text="{Binding Usuario.Cedula}"
-                       Placeholder="Número de Cédula"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Entry Text="{Binding Usuario.Nombre}"
-                       Placeholder="Nombre de Usuario"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Entry Text="{Binding Usuario.Apellido}"
-                       Placeholder="Primer Apellido"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Entry Text="{Binding Usuario.Apellido2}"
-                       Placeholder="Segundo Apellido"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Entry Text="{Binding Usuario.Correo}"
-                       Placeholder="Correo Electrónico">
-                    <Entry.Behaviors>
-                        <Validacion:BehaviorValidacionCorreo
-                            EsCorreoValido="{Binding Source={x:Reference RegistrarUsuario}, 
-                                              Path=BindingContext.EsCorreoValido, Mode=OneWayToSource}"/>
-                    </Entry.Behaviors>
-                </Entry>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Entry Text="{Binding Usuario.Telefono}"
-                       Placeholder="Número de Teléfono">
-                    <Entry.Behaviors>
-                        <Validacion:BehaviorTelefonoValidacion
-                            EsTelefonoValido="{Binding Source={x:Reference RegistrarUsuario}, 
-                                                Path=BindingContext.EsTelefonoValido, Mode=OneWayToSource}"/>
-                    </Entry.Behaviors>
-                </Entry>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                  <Label Text="Fecha de Nacimiento" TextColor="White"/>
-                <DatePicker Date="{Binding Usuario.FechaNacimiento}"
-                               MaximumDate="{Binding FechaMaxima}"
-                               MinimumDate="{Binding FechaMinima}"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Entry x:Name="txtContrasena"
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Grid VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        WidthRequest      ="80"
+                        HeightRequest     ="80"
+                        CornerRadius      ="40"
+                        VerticalOptions   ="Center"
+                        HorizontalOptions ="Center"
+                        BackgroundColor   ="Green"
+                        Text="Perfil"
+                        Command="{Binding SeleccionarFotoPerfilCommand}"
+                        />
+                    <Circle:CircleImage
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        WidthRequest ="80"
+                        HeightRequest="80"
+                        Source="{Binding FotoPerfil}"
+                        Aspect="AspectFit"
+                    />
+                </Grid>
+                <Grid VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Cédula"
+                       TextColor="White"/>
+                    <Entry Grid.Row="0"
+                       Grid.Column="1"
+                       Text="{Binding Usuario.Cedula}"
+                    />
+                    <Label Grid.Row="1"
+                       Grid.Column="0"
+                       Text="Nombre"
+                       TextColor="White"/>
+                    <Entry
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding Usuario.Nombre}"
+                        Placeholder="Nombre de Usuario"/>
+                    <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Primer Apellido"
+                       TextColor="White"/>
+                    <Entry 
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Text="{Binding Usuario.Apellido}"
+                        Placeholder="Primer Apellido"/>
+                    <Label Grid.Row="3"
+                       Grid.Column="0"
+                       Text="Segundo Apellido"
+                       TextColor="White"/>
+                    <Entry 
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Text="{Binding Usuario.Apellido2}"
+                        Placeholder="Segundo Apellido"/>
+                    <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Text="Correo Electrónico"
+                       TextColor="White"/>
+                    <Entry 
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Text="{Binding Usuario.Correo}"
+                        Placeholder="Correo Electrónico">
+                            <Entry.Behaviors>
+                                <Validacion:BehaviorValidacionCorreo
+                                    EsCorreoValido="{Binding Source={x:Reference RegistrarUsuario}, 
+                                                Path=BindingContext.EsCorreoValido, Mode=OneWayToSource}"/>
+                            </Entry.Behaviors>
+                    </Entry>
+                    <Label Grid.Row="5"
+                       Grid.Column="0"
+                       Text="Número Teléfono"
+                       TextColor="White"/>
+                    <Entry 
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Text="{Binding Usuario.Telefono}"
+                        Placeholder="Número de Teléfono">
+                            <Entry.Behaviors>
+                                <Validacion:BehaviorTelefonoValidacion
+                                    EsTelefonoValido="{Binding Source={x:Reference RegistrarUsuario}, 
+                                                Path=BindingContext.EsTelefonoValido, Mode=OneWayToSource}"
+                                    />
+                            </Entry.Behaviors>
+                    </Entry>
+                    <Label Grid.Row="6"
+                       Grid.Column="0"
+                       Text="Contraseña"
+                       TextColor="White"/>
+                    <Entry 
+                       Grid.Row="6"
+                       Grid.Column="1"
+                       x:Name="txtContrasena"
                        Text="{Binding Usuario.Contrasena}"
                        Placeholder="Contraseña"
                        IsPassword="True">
-                    <Entry.Behaviors>
-                        <Validacion:BehaviorCompacionTexto 
+                        <Entry.Behaviors>
+                            <Validacion:BehaviorCompacionTexto 
                             EsContrasenaIgual="{Binding Source={x:Reference RegistrarUsuario}, 
                                                 Path=BindingContext.EsContrasenaIgual, Mode=OneWayToSource}"
                             BindingContext="{x:Reference txtRepetirContrasena}"
                             Text="{Binding Text}"
                             Ent="{x:Reference txtRepetirContrasena}"/>
-                    </Entry.Behaviors>
-                </Entry>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Entry
-                    x:Name="txtRepetirContrasena"
-                    Placeholder="Repetir Contraseña"
-                    IsPassword="True">
-                    <Entry.Behaviors>
-                        <Validacion:BehaviorCompacionTexto
-                            EsContrasenaIgual="{Binding Source={x:Reference RegistrarUsuario}, 
-                                                Path=BindingContext.EsContrasenaIgual, Mode=OneWayToSource}"
-                            BindingContext="{x:Reference txtContrasena}"
-                            Text="{Binding Text}"
-                            />
-                    </Entry.Behaviors>
-                </Entry>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical"
+                        </Entry.Behaviors>
+                    </Entry>
+                    <Label Grid.Row="7"
+                       Grid.Column="0"
+                       Text="Repetir Contraseña"
+                       TextColor="White"/>
+                    <Entry
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        x:Name="txtRepetirContrasena"
+                        Placeholder="Repetir Contraseña"
+                        IsPassword="True">
+                            <Entry.Behaviors>
+                                <Validacion:BehaviorCompacionTexto
+                                EsContrasenaIgual="{Binding Source={x:Reference RegistrarUsuario}, 
+                                                    Path=BindingContext.EsContrasenaIgual, Mode=OneWayToSource}"
+                                BindingContext="{x:Reference txtContrasena}"
+                                Text="{Binding Text}"
+                                />
+                            </Entry.Behaviors>
+                    </Entry>
+                    <Label Grid.Row="8" Grid.Column="0" Text="Fecha de Nacimiento" TextColor="White"/>
+                    <DatePicker Date="{Binding Usuario.FechaNacimiento}"
+                               MaximumDate="{Binding FechaMaxima}"
+                               MinimumDate="{Binding FechaMinima}"
+                               Grid.Row="8"
+                               Grid.Column="1"/>
+                </Grid>
+                <StackLayout Orientation="Vertical"
                          VerticalOptions="FillAndExpand">
-                <Button Text="Regisitrar Usuario"
+                    <Button Text="Regisitrar Usuario"
                         Command="{Binding RegistrarUsuarioCommand}"/>
-            </StackLayout>
+                </StackLayout>
 
-            <ActivityIndicator 
-                IsRunning="{Binding isLoading}"
-                IsVisible="{Binding isLoading}"/>
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

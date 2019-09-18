@@ -118,6 +118,27 @@ namespace Restaurante.APP.ExternalServices
             return vlcJsonRespuesta;
         }
 
+        public async Task<bool> ActualizarReservacion(string JsonUsaurio)
+        {
+            string vlcJsonRespuesta = string.Empty;
+            string URLObtenerRestaurantes = URLWebApi + ControllerReservacion + nameof(ActualizarReservacion);
+
+            using (var HttpCliente = new HttpClient())
+            {
+                var vloHttpRespuesta = await HttpCliente.PostAsync(URLObtenerRestaurantes,
+                            new StringContent(JsonUsaurio,
+                            Encoding.UTF8, "application/json"));
+
+                if (vloHttpRespuesta.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
         public async Task<bool> RegistrarRestaurante(string JsonRestaurante)
         {
             try

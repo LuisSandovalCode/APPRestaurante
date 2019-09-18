@@ -29,7 +29,8 @@ namespace Restaurante.APP.ViewModel.Usuario
         public bool _IsCheckedRecordar { get; set; }
 
         private bool _IsLoading { get; set; }
-        public LoginModel _UsuarioLogin { get; set; }
+
+        private LoginModel _UsuarioLogin = new LoginModel();
 
         public bool _EsCorreoValido { get; set; }
 

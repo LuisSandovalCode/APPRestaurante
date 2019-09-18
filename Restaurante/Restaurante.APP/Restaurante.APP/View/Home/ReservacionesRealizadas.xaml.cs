@@ -17,7 +17,8 @@ namespace Restaurante.APP.View.Home
         {
             InitializeComponent();
 
-            BindingContext = ReservacionesRealizadasViewModel.GetInstance();
+            //BindingContext = ReservacionesRealizadasViewModel.GetInstance();
+            BindingContext = new ReservacionesRealizadasViewModel();
         }
     }
 }

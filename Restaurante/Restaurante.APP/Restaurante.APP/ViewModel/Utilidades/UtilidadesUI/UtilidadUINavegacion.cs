@@ -24,6 +24,7 @@ namespace Restaurante.APP.ViewModel.Utilidades.UtilidadesUI
         public static void IrAView(Page page)
         {
             ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(page);
+            ((MasterDetailPage)App.Current.MainPage).IsPresented = false;
         }
         /// <summary>
         /// Aplica un pop sobre la pagina actual

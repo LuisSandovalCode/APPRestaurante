@@ -1,5 +1,6 @@
 ﻿using Restaurante.APP.Model.Configuracion;
 using Restaurante.APP.Model.Home;
+using Restaurante.APP.View.Home;
 using Restaurante.APP.ViewModel.Utilidades;
 using Restaurante.APP.ViewModel.Utilidades.UtilidadesUI;
 using System.Collections.ObjectModel;
@@ -115,7 +116,7 @@ namespace Restaurante.APP.ViewModel.Home
                     break;
 
                 case (int)EnumHomeMenu.VerReservaciones:
-
+                    UtilidadNavegacionUI.IrAView(new ReservacionesRealizadas());
                     break;
 
                 case (int)EnumHomeMenu.Contactar:

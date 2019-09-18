@@ -67,5 +67,52 @@ namespace Restaurante.APP.ExternalServices
             }
 
         }
+
+        public async Task<bool> EliminarReservacion(string JsonReservacion)
+        {
+            try
+            {
+                bool reservo = false;
+                string URLObtenerRestaurantes = URLWebApi + Controller + nameof(EliminarReservacion);
+
+                using (var HttpCliente = new HttpClient())
+                {
+                    var vloHttpRespuesta = await HttpCliente.PostAsync(URLObtenerRestaurantes,
+                                new StringContent(JsonReservacion,
+                                Encoding.UTF8, "application/json"));
+
+                    if (vloHttpRespuesta.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        reservo = true;
+                    }
+                }
+
+                return reservo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<string> ObtenerReservaciones(string JsonUsaurio)
+        {
+            string vlcJsonRespuesta = string.Empty;
+            string URLObtenerRestaurantes = URLWebApi + Controller + nameof(ObtenerReservaciones);
+
+            using (var HttpCliente = new HttpClient())
+            {
+                var vloHttpRespuesta = await HttpCliente.PostAsync(URLObtenerRestaurantes,
+                            new StringContent(JsonUsaurio,
+                            Encoding.UTF8, "application/json"));
+
+                if (vloHttpRespuesta.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    vlcJsonRespuesta = await vloHttpRespuesta.Content.ReadAsStringAsync();
+                }
+            }
+
+            return vlcJsonRespuesta;
+        }
     }
 }

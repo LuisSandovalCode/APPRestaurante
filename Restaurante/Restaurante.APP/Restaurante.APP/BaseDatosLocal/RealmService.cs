@@ -78,55 +78,32 @@ namespace Restaurante.APP.BaseDatosLocal
         /// <returns></returns>
         public bool GuardarCredenciales(LoginModel usuario)
         {
+            bool RegistroUsuario = false;
             try
             {
-                bool RegistroUsuario = false;
-                var CredencialesUsuario = _Realm.All<Login>().ToList();
-                var vlbEsExistenCrendenciales = CredencialesUsuario
-                    .FirstOrDefault(x => x.Correo.Equals(usuario.Correo) && x.Contrasena.Equals(usuario.Contrasena)) != null;
-
-                if (!vlbEsExistenCrendenciales)
+                using (var trans = _Realm.BeginWrite())
                 {
-                    using (var trans = _Realm.BeginWrite())
-                    {
-                        Login NuevoLogin = new Login()
-                        {
-                            Correo = usuario.Correo,
-                            Contrasena = usuario.Contrasena
-                        };
-
-                        _Realm.Add<Login>(NuevoLogin);
-                        trans.Commit();
-                    }
-
-                    RegistroUsuario = true;
+                    _Realm.RemoveAll<Login>();
+                    trans.Commit();
                 }
-                else
+                using (var trans = _Realm.BeginWrite())
                 {
-                    using (var trans = _Realm.BeginWrite())
+                    Login NuevoLogin = new Login()
                     {
-                        _Realm.RemoveAll<Login>();
-                        trans.Commit();
-                    }
+                        Correo = usuario.Correo,
+                        Contrasena = usuario.Contrasena
+                    };
 
-                    using (var trans = _Realm.BeginWrite())
-                    {
-                        Login NuevoLogin = new Login()
-                        {
-                            Correo = usuario.Correo,
-                            Contrasena = usuario.Contrasena
-                        };
-
-                        _Realm.Add<Login>(NuevoLogin);
-                        trans.Commit();
-                    }
+                    _Realm.Add<Login>(NuevoLogin);
+                    trans.Commit();
                 }
-                return RegistroUsuario;
+                RegistroUsuario = true;
             }
             catch (Exception ex)
             {
-                throw ex;
+                RegistroUsuario = false;
             }
+            return RegistroUsuario;
         } 
         #endregion
     }

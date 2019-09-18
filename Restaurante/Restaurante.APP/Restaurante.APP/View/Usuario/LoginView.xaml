@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Validacion="clr-namespace:Restaurante.APP.View.Behavior"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              mc:Ignorable="d"
              x:Class="Restaurante.APP.View.Usuario.LoginView"
              BackgroundColor="SkyBlue"
@@ -14,8 +15,8 @@
                      BackgroundColor="SkyBlue">
             
             <StackLayout Orientation="Vertical"
-                         VerticalOptions="CenterAndExpand"
-                         HorizontalOptions="CenterAndExpand">
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand">
                 <Entry Placeholder="Correo Usuario"
                        Text="{Binding UsuarioLogin.Correo}">
                     <Entry.Behaviors>
@@ -28,26 +29,26 @@
             </StackLayout>
 
             <StackLayout Orientation="Vertical"
-                         VerticalOptions="CenterAndExpand"
-                         HorizontalOptions="CenterAndExpand">
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand">
                 <Entry Placeholder="Contraseña"
                        IsPassword="True"
                        Text="{Binding UsuarioLogin.Contrasena}">
-                    <Entry.Behaviors>
-                        <Validacion:BehaviorContrasenaValidacion
-                            EsContrasenaValido="{Binding Source={x:Reference LoginUsuario}, 
-                                                Path=BindingContext.EsContrasenaValida, Mode=OneWayToSource}"
-                            />
-                    </Entry.Behaviors>
                 </Entry>
             </StackLayout>
-
+            
             <StackLayout HorizontalOptions="CenterAndExpand"
                          VerticalOptions="CenterAndExpand">
                 <StackLayout Orientation="Vertical"
                              VerticalOptions="Start">
                     <Button Text="Iniciar Sesion"
                         Command="{Binding IniciarSesionCommand}"/>
+                </StackLayout>
+                <StackLayout>
+                    <input:CheckBox Text="¿Desea recordar sus credenciales?"
+                                    CheckChangedCommand="{Binding IsCheckedCommand}"
+                                    IsChecked="{Binding IsCheckedRecordar}"
+                                    />
                 </StackLayout>
                 <StackLayout Orientation="Vertical"
                              VerticalOptions="Fill">

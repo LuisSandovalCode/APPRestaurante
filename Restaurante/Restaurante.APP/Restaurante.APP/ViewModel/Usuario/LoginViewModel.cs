@@ -24,12 +24,24 @@ namespace Restaurante.APP.ViewModel.Usuario
 
         private static SVUsuario ServicioUsuario;
 
+        public bool _IsCheckedRecordar { get; set; }
+
         private bool _IsLoading { get; set; }
         public LoginModel _UsuarioLogin { get; set; }
 
         public bool _EsCorreoValido { get; set; }
 
         public bool _EsContrasenaValida { get; set; }
+
+        public bool IsCheckedRecordar
+        {
+            get=>_IsCheckedRecordar;
+            set
+            {
+                _IsCheckedRecordar = value;
+                OnPropertyChanged("IsCheckedRecordar");
+            }
+        }
 
         public LoginModel UsuarioLogin
         {
@@ -88,10 +100,20 @@ namespace Restaurante.APP.ViewModel.Usuario
         }
         public ICommand IniciarSesionCommand { get; set; }
 
+        public ICommand IsCheckedCommand { get; set; }
         public ICommand EnterRegistrarUsuarioCommand { get; set; }
         #endregion
 
         #region [Metodos]
+
+        public void IsChecked()
+        {
+            if(IsCheckedRecordar)
+            {
+                UsuarioLogin = ServicioReal.RecordarCredenciales();
+            }
+        }
+
         public async void IniciarSesion()
         {
             IsLoading = true;
@@ -149,9 +171,9 @@ namespace Restaurante.APP.ViewModel.Usuario
                 ServicioUsuario = new SVUsuario();
             if (ServicioReal == null)
                 ServicioReal = new RealmService();
-            _UsuarioLogin = ServicioReal.RecordarCredenciales();
             IniciarSesionCommand = new Command(IniciarSesion);
             EnterRegistrarUsuarioCommand = new Command(EnterRegistrarUsuario);
+            IsCheckedCommand = new Command(IsChecked);
         }
         #endregion
     }

@@ -13,8 +13,8 @@ namespace Restaurante.APP.View.Home
         public HomeMenuView()
         {
             InitializeComponent();
-            BindingContext = new HomeMenuViewModel();
-            //BindingContext = HomeMenuViewModel.ObtenerInstancia();
+            //BindingContext = new HomeMenuViewModel();
+            BindingContext = HomeMenuViewModel.ObtenerInstancia();
         }
     }
 }

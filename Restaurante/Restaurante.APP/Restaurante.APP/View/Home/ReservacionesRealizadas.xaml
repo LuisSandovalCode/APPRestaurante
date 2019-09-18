@@ -23,6 +23,10 @@
                                     Command="{Binding Path=BindingContext.EliminarReservacionCommand, Source={x:Reference Reservaciones}}"
                                     CommandParameter="{Binding .}"
                                 />
+                                <MenuItem Text="Editar"
+                                              IsDestructive="true"
+                                              Command="{Binding Path=BindingContext.EnterActualizarReservacionCommand, Source={x:Reference Reservaciones}}"
+                                              CommandParameter="{Binding .}"/>
                             </ImageCell.ContextActions>
                         </ImageCell>
                     </DataTemplate>

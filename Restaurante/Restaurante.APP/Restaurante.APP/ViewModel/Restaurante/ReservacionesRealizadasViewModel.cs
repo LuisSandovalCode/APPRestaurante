@@ -52,7 +52,7 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
             EliminarReservacionCommand = new Command<Reservacion>(EliminarReservacion);
             EnterActualizarReservacionCommand = new Command<Reservacion>(InicializarActualizarReservacionCommand);
-            ActualizarReservacionCommand = new Command<Reservacion>(ActualizarReservacion);
+            ActualizarReservacionCommand = new Command(ActualizarReservacion);
 
         }
 
@@ -120,16 +120,19 @@ namespace Restaurante.APP.ViewModel.Restaurante
         public void InicializarActualizarReservacionCommand(Reservacion reservacion)
         {
             UtilidadNavegacionUI.IrAView(new ReservacionesActualizar());
-            ReservacionET.Nombre = reservacion.Nombre;
-            ReservacionET.FechaReservacion = reservacion.FechaReservacion;
-            ReservacionET.IdReservacion = reservacion.IdReservacion;
+            Reservacion vloAuxReservacion = new Reservacion();
+            vloAuxReservacion.Nombre = reservacion.Nombre;
+            vloAuxReservacion.FechaReservacion = reservacion.FechaReservacion;
+            vloAuxReservacion.IdReservacion = reservacion.IdReservacion;
+
+            ReservacionET = vloAuxReservacion;
         }
 
-        public async void ActualizarReservacion(Reservacion reservacion)
+        public async void ActualizarReservacion()
         {
-            if (reservacion != null)
+            if (ReservacionET != null)
             {
-                var Confirmacion = await App.Current.MainPage.DisplayAlert("Restaurante", "¿Desea deshacer esta reservación?", "Sí", "No");
+                var Confirmacion = await App.Current.MainPage.DisplayAlert("Restaurante", "¿Desea modificar realmente la fecha de su reservación?", "Sí", "No");
 
                 if (Confirmacion)
                 {
@@ -137,9 +140,9 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
                     Reservacion vloReservacion = new Reservacion
                     {
-                        IdReservacion = reservacion.IdReservacion,
-                        Nombre = reservacion.Nombre,
-                        FechaReservacion = reservacion.FechaReservacion
+                        IdReservacion = ReservacionET.IdReservacion,
+                        Nombre = ReservacionET.Nombre,
+                        FechaReservacion = ReservacionET.FechaReservacion
                     };
 
 

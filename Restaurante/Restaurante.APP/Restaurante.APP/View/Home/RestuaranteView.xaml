@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Restaurante.APP.View.Home.RestuaranteView"
+             x:Name="Restaurante"
+             Title="Restaurantes">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label>Lista de Restaurantes</Label>
+            <ListView
+                ItemsSource="{Binding ListaRestaurantes}"
+                >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell
+                            Text="{Binding Nombre}"
+                            Detail="{Binding Pais}"
+                            Command="{Binding Path=BindingContext.ReservarCommand, Source={x:Reference Restaurante}}"
+                            CommandParameter="{Binding .}"
+                            >
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

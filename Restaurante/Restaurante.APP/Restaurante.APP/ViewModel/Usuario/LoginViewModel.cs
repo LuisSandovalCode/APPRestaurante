@@ -12,6 +12,8 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.IO;
 using System;
+using Restaurante.APP.ViewModel.Restaurante;
+
 namespace Restaurante.APP.ViewModel.Usuario
 {
     public class LoginViewModel : PropiedadNotificacion
@@ -134,7 +136,8 @@ namespace Restaurante.APP.ViewModel.Usuario
                 byte[] vloFotoPerfil = Convert.FromBase64String(vloUsuario.FotoPerfil);
                 HomeMenuViewModel.ObtenerInstancia().FotoPerfil = ImageSource.FromStream(()=>new MemoryStream(vloFotoPerfil));
                 HomeMenuViewModel.ObtenerInstancia().NombreUsuario = vloUsuario.Nombre + "  "+vloUsuario.Apellido;
-                UtilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new HomeView());
+                RestauranteViewModel.GetInstance().UsuarioLogeado = vloUsuario;
+                UtilidadNavegacionUI.CrearMasterDetailPage(new HomeMenuView(), new RestuaranteView());
             }
             else
             {

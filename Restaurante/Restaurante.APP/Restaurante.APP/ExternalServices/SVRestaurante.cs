@@ -11,6 +11,7 @@ namespace Restaurante.APP.ExternalServices
     {
         private static string URLWebApi { get; set; }
         private static string Controller { get; set; }
+        private static string ControllerReservacion { get; set; }
 
         public SVRestaurante()
         {
@@ -18,6 +19,8 @@ namespace Restaurante.APP.ExternalServices
                 URLWebApi = AppSettingsManager.Settings["Service"];
             if (string.IsNullOrEmpty(Controller))
                 Controller = AppSettingsManager.Settings["RestauranteController"];
+            if (string.IsNullOrEmpty(ControllerReservacion))
+                ControllerReservacion = AppSettingsManager.Settings["ReservacionController"];
         }
 
         public async Task<string> ObtenerRestaurantes()
@@ -40,12 +43,12 @@ namespace Restaurante.APP.ExternalServices
             return vlcJsonRespuesta;
         }
 
-        public async Task<bool> RealizarReseracion(string JsonReservacion)
+        public async Task<bool> RegistrarReservacion(string JsonReservacion)
         {
             try
             {
                 bool reservo = false;
-                string URLObtenerRestaurantes = URLWebApi + Controller + nameof(RealizarReseracion);
+                string URLObtenerRestaurantes = URLWebApi + ControllerReservacion + nameof(RegistrarReservacion);
 
                 using (var HttpCliente = new HttpClient())
                 {
@@ -73,7 +76,7 @@ namespace Restaurante.APP.ExternalServices
             try
             {
                 bool reservo = false;
-                string URLObtenerRestaurantes = URLWebApi + Controller + nameof(EliminarReservacion);
+                string URLObtenerRestaurantes = URLWebApi + ControllerReservacion + nameof(EliminarReservacion);
 
                 using (var HttpCliente = new HttpClient())
                 {
@@ -95,10 +98,10 @@ namespace Restaurante.APP.ExternalServices
             }
         }
 
-        public async Task<string> ObtenerReservaciones(string JsonUsaurio)
+        public async Task<string> ObtenerReservacionesUsuario(string JsonUsaurio)
         {
             string vlcJsonRespuesta = string.Empty;
-            string URLObtenerRestaurantes = URLWebApi + Controller + nameof(ObtenerReservaciones);
+            string URLObtenerRestaurantes = URLWebApi + ControllerReservacion + nameof(ObtenerReservacionesUsuario);
 
             using (var HttpCliente = new HttpClient())
             {

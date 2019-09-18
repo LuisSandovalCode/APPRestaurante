@@ -13,8 +13,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell
-                            Text="{Binding Restaurante}"
-                            Detail="{Binding Descripcion}"
+                            Text="{Binding Nombre}"
+                            Detail="{Binding FechaReservacion}"
                          >
                             <ImageCell.ContextActions>
                                 <MenuItem

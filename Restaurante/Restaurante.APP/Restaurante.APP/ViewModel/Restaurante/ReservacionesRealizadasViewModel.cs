@@ -5,6 +5,7 @@ using Restaurante.APP.ViewModel.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,7 +17,7 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
         private static ReservacionesRealizadasViewModel _instance;
 
-        public ObservableCollection<Reservacion> _ListaReservaciones { get; set; }
+        private ObservableCollection<Reservacion> _ListaReservaciones = new ObservableCollection<Reservacion>();
 
         private static SVRestaurante ServicioRestaurante;
 
@@ -50,7 +51,7 @@ namespace Restaurante.APP.ViewModel.Restaurante
         {
             var usuario = JsonConvert.SerializeObject(RestauranteViewModel.GetInstance().UsuarioLogeado);
 
-            string JsonReservaciones = await ServicioRestaurante.ObtenerReservaciones(usuario);
+            string JsonReservaciones = await ServicioRestaurante.ObtenerReservacionesUsuario(usuario);
 
             ListaReservaciones = JsonConvert.DeserializeObject<ObservableCollection<Reservacion>>(JsonReservaciones);
         }
@@ -64,12 +65,26 @@ namespace Restaurante.APP.ViewModel.Restaurante
                 if (Confirmacion)
                 {
 
-                    var jsonReservacion = JsonConvert.SerializeObject(reservacion);
+
+                    Reservacion vloReservacion = new Reservacion
+                    {
+                        IdReservacion = reservacion.IdReservacion
+                    };
+
+
+                    var jsonReservacion = JsonConvert.SerializeObject(vloReservacion);
 
                     var Reservo = await ServicioRestaurante.EliminarReservacion(jsonReservacion);
 
                     if (Reservo)
                     {
+
+                        var vloAux = ListaReservaciones.Where(x => x.IdReservacion != vloReservacion.IdReservacion).ToList();
+                        ListaReservaciones.Clear();
+                        foreach (var item in vloAux)
+                        {
+                            ListaReservaciones.Add(item);
+                        }
                         await App.Current.MainPage.DisplayAlert("Restaurante", "Reservacion cancelada con exito", "Ok");
                     }
                     else

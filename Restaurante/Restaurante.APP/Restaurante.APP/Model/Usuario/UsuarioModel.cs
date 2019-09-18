@@ -8,6 +8,7 @@ namespace Restaurante.APP.Model.Usuario
     {
         public int ID { get; set; }
 
+        public int IdUsuario { get { return ID; } }
         public string Cedula { get; set; }
 
         public string Nombre { get; set; }

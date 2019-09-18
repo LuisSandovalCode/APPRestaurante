@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Restaurante.APP.Model.Restaurante;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Restaurante.APP.Model.Restaurante
 {
-    public class Reservacion
+    public class Reservacion : RestauranteModel
     {
-        public string Restaurante { get; set; }
-
-        public string Descripcion { get; set; }
+        public int IdReservacion { get; set; }
+        public int IdUsuario { get; set; }
+        public DateTime FechaReservacion { get; set; }
     }
+
 }

@@ -8,11 +8,7 @@ namespace Restaurante.APP.Model.Restaurante
     public class RestauranteModel
     {
 
-        public string CedulaUsuario { get; set; }
-
-        public int Id { get; set; }
-
-        public ImageSource Imagen { get; set; }
+        public int IdRestaurante { get; set; }
 
         public string Nombre { get; set; }
 
@@ -20,6 +16,14 @@ namespace Restaurante.APP.Model.Restaurante
 
         public string Ciudad { get; set; }
 
-        public DateTime FechaIngreso { get; set; }
+        public int CodigoPostal { get; set; }
+
+        public decimal Longitud { get; set; }
+
+        public decimal Latitud { get; set; }
+
+        public string FotoRestaurante { get; set; }
+
+        public DateTime FechaRegistro { get; set; }
     }
 }

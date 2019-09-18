@@ -95,11 +95,19 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
                 if(Confirmacion)
                 {
-                    restaurante.CedulaUsuario = UsuarioLogeado.Cedula;
+                    //restaurante.IdRestaurante = UsuarioLogeado.Cedula;
 
-                    var jsonReservacion = JsonConvert.SerializeObject(restaurante);
+                    Reservacion vloReservacion = new Reservacion
+                    {
+                        IdUsuario = UsuarioLogeado.ID,
+                        IdRestaurante = restaurante.IdRestaurante,
+                        FechaReservacion = DateTime.Now
+                    };
 
-                    var Reservo = await ServicioRestaurante.RealizarReseracion(jsonReservacion);
+                    //var jsonReservacion = JsonConvert.SerializeObject(restaurante);
+                    var jsonReservacion = JsonConvert.SerializeObject(vloReservacion);
+
+                    var Reservo = await ServicioRestaurante.RegistrarReservacion(jsonReservacion);
 
                     if (Reservo)
                     {

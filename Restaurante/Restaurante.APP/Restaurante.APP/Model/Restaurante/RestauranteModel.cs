@@ -17,5 +17,9 @@ namespace Restaurante.APP.Model.Restaurante
         public string Nombre { get; set; }
 
         public string Pais { get; set; }
+
+        public string Ciudad { get; set; }
+
+        public DateTime FechaIngreso { get; set; }
     }
 }

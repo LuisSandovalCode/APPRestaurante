@@ -27,6 +27,8 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
         public ICommand ReservarCommand { get; set; }
 
+        
+
         public ObservableCollection<RestauranteModel> ListaRestaurantes
         {
             set
@@ -37,7 +39,7 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
             get
             {
-                return ListaRestaurantes;
+                return _ListaRestaurante;
             }
         }
 
@@ -62,11 +64,12 @@ namespace Restaurante.APP.ViewModel.Restaurante
             CargarRestaurantes();
 
             ReservarCommand = new Command<RestauranteModel>(Reservar);
+
+            
         }
 
         public async void CargarRestaurantes()
         {
-
             string JsonRestaurantes = await ServicioRestaurante.ObtenerRestaurantes();
 
             if (!string.IsNullOrEmpty(JsonRestaurantes))
@@ -109,5 +112,7 @@ namespace Restaurante.APP.ViewModel.Restaurante
                 }
             }
         }
+
+        
     }
 }

@@ -114,5 +114,32 @@ namespace Restaurante.APP.ExternalServices
 
             return vlcJsonRespuesta;
         }
+
+        public async Task<bool> RegistrarRestaurante(string JsonRestaurante)
+        {
+            try
+            {
+                bool reservo = false;
+                string URLObtenerRestaurantes = URLWebApi + Controller + nameof(RegistrarRestaurante);
+
+                using (var HttpCliente = new HttpClient())
+                {
+                    var vloHttpRespuesta = await HttpCliente.PostAsync(URLObtenerRestaurantes,
+                                new StringContent(JsonRestaurante,
+                                Encoding.UTF8, "application/json"));
+
+                    if (vloHttpRespuesta.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        reservo = true;
+                    }
+                }
+
+                return reservo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Restaurante.APP.ExternalServices;
 using Restaurante.APP.Interfaces;
 using Restaurante.APP.Model.Usuario;
+using Restaurante.APP.View.Usuario;
 using Restaurante.APP.ViewModel.Utilidades;
 using System;
 using System.Collections.Generic;
@@ -206,6 +207,7 @@ namespace Restaurante.APP.ViewModel.Usuario
                     await App.Current.MainPage.DisplayAlert("Restaurante", "Usuario Registrado con éxito", "Ok");
                 else
                     await App.Current.MainPage.DisplayAlert("Restaurante", "Error al registrar usuario, por favor verifique los datos", "Ok");
+                App.Current.MainPage = new LoginView();
             }
             catch (Exception ex)
             {

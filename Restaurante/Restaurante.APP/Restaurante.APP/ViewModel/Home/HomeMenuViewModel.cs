@@ -65,24 +65,7 @@ namespace Restaurante.APP.ViewModel.Home
                 IconoIOS = ConfigIOS.MenuIconVerReservaciones
             });
 
-            ListaOpcionesMenu.Add(new HomeMenu
-            {
-                Id = (int)EnumHomeMenu.Contactar,
-                Nombre = "Contactar",
-                Detalle = "Conctacte al restaurante",
-                IconoAndroid = ConfigAndroid.MenuIconContactar,
-                IconoIOS = ConfigIOS.MenuIconContactar
-            });
 
-
-            ListaOpcionesMenu.Add(new HomeMenu
-            {
-                Id = (int)EnumHomeMenu.Informacion,
-                Nombre = "Información",
-                Detalle = "Detalles de uso de la aplicación",
-                IconoAndroid = ConfigAndroid.MenuIconInformacion,
-                IconoIOS = ConfigIOS.MenuIconInformacion
-            });
 
             ListaOpcionesMenu.Add(new HomeMenu
             {

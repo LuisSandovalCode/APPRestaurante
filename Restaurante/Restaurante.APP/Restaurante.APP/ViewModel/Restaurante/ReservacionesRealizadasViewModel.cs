@@ -17,6 +17,20 @@ namespace Restaurante.APP.ViewModel.Restaurante
     public class ReservacionesRealizadasViewModel : PropiedadNotificacion
     {
 
+        public bool _IsLoading { get; set; }
+
+        public bool IsLoading
+        {   get
+            {
+                return _IsLoading;
+            }
+            set
+            {
+                _IsLoading = false;
+                OnPropertyChanged("IsLoading");
+            }
+        }
+
         private static ReservacionesRealizadasViewModel _instance;
 
         private ObservableCollection<Reservacion> _ListaReservaciones = new ObservableCollection<Reservacion>();
@@ -71,11 +85,14 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
         public async void CargarReservacionesUsuario()
         {
+            IsLoading = true;
             var usuario = JsonConvert.SerializeObject(RestauranteViewModel.GetInstance().UsuarioLogeado);
 
             string JsonReservaciones = await ServicioRestaurante.ObtenerReservacionesUsuario(usuario);
 
             ListaReservaciones = JsonConvert.DeserializeObject<ObservableCollection<Reservacion>>(JsonReservaciones);
+
+            IsLoading = false;
         }
 
         public async void EliminarReservacion(Reservacion reservacion)

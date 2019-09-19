@@ -20,7 +20,8 @@ namespace Restaurante.APP.ViewModel.Restaurante
         public bool _IsLoading { get; set; }
 
         public bool IsLoading
-        {   get
+        {
+            get
             {
                 return _IsLoading;
             }
@@ -169,7 +170,6 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
                     if (Reservo)
                     {
-
                         var vloAux = ListaReservaciones.ToList();
                         ListaReservaciones.Clear();
                         foreach (var item in vloAux)
@@ -192,8 +192,16 @@ namespace Restaurante.APP.ViewModel.Restaurante
 
         public static ReservacionesRealizadasViewModel GetInstance()
         {
+
             if (_instance == null)
                 _instance = new ReservacionesRealizadasViewModel();
+
+            return _instance;
+        }
+
+        public static ReservacionesRealizadasViewModel GetInstanceActualizar()
+        {
+            _instance = new ReservacionesRealizadasViewModel();
 
             return _instance;
         }
